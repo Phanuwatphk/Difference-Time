@@ -27,7 +27,7 @@ def getDifference(dt1, dt2):#หาความต่างระหว่าง
 
     return int(math.fabs(n2 - n1))#return ความห่างระหว่างวัน
 
-def cal_f1():
+def cal_f1():#ความต่างวันที่
     print("1 = เริ่มจากวันนี้\n2 = กำหนดวันที่เอง")
     A = input("ตัวเลือก : ")
 
@@ -66,24 +66,24 @@ def cal_f1():
         i += 1
     print("ห่างกัน", y, "ปี", m, "เดือน", sum, "วัน (%d วัน)" % s)#แสดงผล
 
-def cal_f2():
+def cal_f2():#ความต่างเวลา
     print("1 = เริ่มจากตอนนี้\n2 = กำเวลาเอง")
     A = input("ตัวเลือก : ")
 
     if A == '1':#เริ่มจากตอนนี้
         t1 = datetime.utcnow() + timedelta(hours = 7)#return เวลาปัจจุบันของประเทศไทย(UTC+7) เข้าออบเจ็ค datetime แล้วเก็บไว้ใน t1
-        t2 = datetime.strptime(input("ใส่เวลาที่จะเทียบ (ชั่วโมง:นาที) : "), "%H:%M")#รับข้อมูลเวลาเข้าออบเจ็ค datetime แล้วเก็บไว้ใน t2
+        t2 = datetime.utcnow().strptime(input("ใส่เวลาที่จะเทียบ (ชั่วโมง:นาที) : "), "%H:%M")#รับข้อมูลเวลาเข้าออบเจ็ค datetime แล้วเก็บไว้ใน t2
     elif A == '2':#กำหนดเวลาเอง
         t1 = datetime.strptime(input("ใส่เวลาที่ 1 (ชั่วโมง:นาที) : "), "%H:%M")
         t2 = datetime.strptime(input("ใส่เวลาที่ 2 (ชั่วโมง:นาที) : "), "%H:%M")
-    if t2 > t1:#เมื่อเวลาที่ 1 คืออดีตและเวลาที่ 2 คืออนาคต
+    if t2.hour > t1.hour:#เมื่อเวลาที่ 1 คืออดีตและเวลาที่ 2 คืออนาคต
         delta = t2 - timedelta(hours = t1.hour, minutes = t1.minute)#เอาเวลาที่ 2 (t2) - เวลาที่ 1 (t1) แล้วเก็บไว้ใน delta
     else:#เมื่อเวลาที่ 1 คืออนาคตและเวลาที่ 2 คืออดีต
         delta = t1 - timedelta(hours = t2.hour, minutes = t2.minute)#เอาเวลาที่ 1 (t1) - เวลาที่ 2 (t2) แล้วเก็บไว้ใน delta
 
     print("ห่างกัน", delta.hour, "ชั่วโมง", delta.minute, "นาที")#แสดงผล
 
-def cal_f3():
+def cal_f3():#ความต่างวันที่และเวลา
     print("1 = เริ่มจากวันที่และเวลาตอนนี้\n2 = กำหนดวันที่และเวลาเอง")
     A = input("ตัวเลือก : ")
 
